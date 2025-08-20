@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ur">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simple Calculator UI</title>
+  <style>
+    /* --- Basic reset --- */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Naskh Arabic UI", Arial, sans-serif;
+      background: #f5f6f8;
+      display: grid;
+      place-items: center;
+      color: #222;
+    }
+
+    /* --- Calculator Card --- */
+    .calc {
+      width: min(420px, 92vw);
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      padding: 18px;
+    }
+
+    /* --- Display --- */
+    .display {
+      width: 100%;
+      height: 58px;
+      border: 1px solid #e1e5ea;
+      border-radius: 12px;
+      padding: 0 14px;
+      font-size: 22px;
+      outline: none;
+      background: #fbfcfe;
+      text-align: right; /* calculator feel */
+    }
+    .display::placeholder { color: #9aa4af; }
+
+    /* --- Keys Grid --- */
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      appearance: none;
+      border: 1px solid #e1e5ea;
+      background: #ffffff;
+      border-radius: 12px;
+      height: 48px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform .05s ease, box-shadow .15s ease, background .2s ease;
+    }
+    .btn:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+    .btn:active { transform: translateY(1px); }
+
+    .op { background: #f0f4ff; border-color: #d9e3ff; }
+    .equals {
+      background: #111827; /* dark for emphasis */
+      color: #fff;
+      border-color: #111827;
+      grid-column: span 1;
+    }
+
+    /* Small screens */
+    @media (max-width: 360px) {
+      .btn { font-size: 16px; height: 46px; }
+      .display { font-size: 20px; height: 54px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc" role="application" aria-label="Simple Calculator">
+    <input
+      id="display"
+      class="display num1"
+      type="text"
+      inputmode="decimal"
+      placeholder=""
+      aria-label="Calculator display"
+    />
+    <input
+      id="displays"
+      class="display num2"
+      type="text"
+      inputmode="decimal"
+      placeholder=""
+      aria-label="Calculator display"
+    />
+
+    <div class="keys" aria-label="Calculator keys">
+      <!-- Operation buttons (bind via [data-op]) -->
+      <button  type="button" class="btn op add-btn" data-op="+" aria-label="Add" >+</button>
+      <button type="button" class="btn op sub-btn" data-op="-" aria-label="Subtract">−</button>
+      <button type="button" class="btn op mul-btn" data-op="*" aria-label="Multiply">×</button>
+      <button type="button" class="btn op div-btn" data-op="/" aria-label="Divide">÷</button>
+
+      <!-- Equals button (bind by id) -->
+      <button type="button" class="btn equals" id="equals" aria-label="Equals">clear</button>
+    </div>
+  </div>
+<p class="result"></p>
+<script>
+    // ADDITION FUNCTION
+
+    addition= () =>{
+        let in1 = Number(document.querySelector(".num1").value);
+        let in2 = Number(document.querySelector(".num2").value);
+        let cin = in1+in2
+    document.querySelector(".result").innerText = (`Result = ${cin}`)
+
+    }
+     document.querySelector(".add-btn").addEventListener("click",addition)
+ // SUBTRACTION FUNCTION
+    
+ subtraction= () =>{
+        let in1 = Number(document.querySelector(".num1").value);
+        let in2 = Number(document.querySelector(".num2").value);
+        let cin = in1-in2
+    document.querySelector(".result").innerText = (`Result = ${cin}`)
+
+    }
+     document.querySelector(".sub-btn").addEventListener("click",subtraction)
+
+ // MULTIPLICATION FUNCTION
+    
+      multi= () =>{
+        let in1 = Number(document.querySelector(".num1").value);
+        let in2 = Number(document.querySelector(".num2").value);
+        let cin = in1*in2
+    document.querySelector(".result").innerText = (`Result = ${cin}`)
+
+    }
+     document.querySelector(".mul-btn").addEventListener("click",multi)
+ // DIVISION FUNCTION
+    
+      divi= () =>{
+        let in1 = Number(document.querySelector(".num1").value);
+        let in2 = Number(document.querySelector(".num2").value);
+        let cin = in1%in2
+    document.querySelector(".result").innerText = (`Result = ${cin}`)
+
+    }
+     document.querySelector(".div-btn").addEventListener("click",divi)
+// clear button
+
+  clearall= () =>{
+        let in1 = document.querySelector(".num1").value = "";
+        let in2 = document.querySelector(".num2").value = "";
+        let cin = in1/in2
+    document.querySelector(".result").innerText = "";
+
+    }
+     document.querySelector("#equals").addEventListener("click",clearall)
+
+
+</script>
+  
+</body>
+</html>
